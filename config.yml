@@ -1,0 +1,42 @@
+backend:
+  name: github
+  repo: sahilqureshi270-cmyk/qadmora
+  branch: main
+media_folder: images/uploads
+public_folder: /images/uploads
+collections:
+  - label: Shop
+    name: shop
+    files:
+      - label: Products
+        name: products
+        file: data/products.json
+        fields:
+          - label: Products
+            name: products
+            widget: list
+            label_singular: Product
+            summary: "{{fields.name}} ({{fields.sku}})"
+            fields:
+              - {label: "SKU (unique, e.g. QDM-B-004)", name: sku, widget: string}
+              - {label: Name, name: name, widget: string}
+              - {label: Category, name: cat, widget: select, options: [{label: Boys, value: boys}, {label: Girls, value: girls}, {label: Ladies, value: ladies}]}
+              - {label: Season, name: season, widget: select, options: [All, Summer, Winter], default: All}
+              - {label: "Price (Rs.)", name: price, widget: number, value_type: int, min: 1}
+              - {label: Colours, name: colours, widget: list, default: [Black]}
+              - {label: "Sizes (optional, EU. Khali = default sizes)", name: sizes, widget: list, required: false}
+              - {label: Description, name: desc, widget: text}
+              - {label: "Photos (up to 3)", name: images, widget: list, required: false, max: 3, field: {label: Photo, name: image, widget: image}}
+      - label: Site settings
+        name: settings
+        file: data/settings.json
+        fields:
+          - {label: "WhatsApp number (923001234567)", name: whatsapp, widget: string}
+          - {label: "Show seasons", name: useSeasons, widget: boolean, default: true}
+          - label: Ads
+            name: ads
+            widget: object
+            fields:
+              - {label: "Top bar", name: top, widget: object, fields: [{label: Text, name: text, widget: string, required: false}, {label: Link, name: link, widget: string, required: false}, {label: "Button text", name: label, widget: string, required: false}]}
+              - {label: "Middle banner", name: middle, widget: object, fields: [{label: Title, name: title, widget: string, required: false}, {label: Link, name: link, widget: string, required: false}, {label: "Button text", name: label, widget: string, required: false}, {label: Image, name: image, widget: image, required: false}]}
+          - {label: Social, name: social, widget: object, fields: [{label: Instagram, name: instagram, widget: string, required: false}, {label: Facebook, name: facebook, widget: string, required: false}, {label: TikTok, name: tiktok, widget: string, required: false}]}
